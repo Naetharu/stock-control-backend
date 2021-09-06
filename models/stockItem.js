@@ -9,7 +9,7 @@ const StockItemSchema = new Schema({
   status: {
     type: String,
     required: true,
-    enum: ["Ordered", "Stock", "Build", "Ready", "Deployed", "Scrapped"],
+    enum: ["Order", "Stock", "Build", "Ready", "Deployed", "Scrapped"],
   },
   contract: {
     type: String,

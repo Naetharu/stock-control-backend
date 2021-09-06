@@ -2,10 +2,15 @@ const StockItem = require("../models/stockItem");
 
 // Create
 exports.create_stock_item = (req, res) => {
-  const { name, status } = req.body;
+  const { name, status, contract, location, serial, asset } = req.body.item;
+
   const newItem = new StockItem({
     name: name,
     status: status,
+    contract: contract,
+    location: location,
+    serial: serial,
+    asset: asset,
   });
   newItem.save((err) => {
     if (err) {
@@ -38,7 +43,41 @@ exports.get_stock_item = (req, res) => {
 
 // Update
 exports.update_stock_item = (req, res) => {
-  res.send("updating stock item");
+  let currentStatus = req.body.item.status;
+  let choice = {};
+
+  switch (currentStatus) {
+    case "Order":
+      choice = { status: "Stock" };
+      break;
+    case "Stock":
+      choice = { status: "Build" };
+      break;
+    case "Build":
+      choice = { status: "Ready" };
+      break;
+    case "Ready":
+      choice = { status: "Deployed" };
+      break;
+    case "Deployed":
+      choice = { status: "Stock" };
+      break;
+    default:
+      choice = { status: "Stock" };
+      break;
+  }
+
+  StockItem.findByIdAndUpdate(
+    req.params.id,
+    { status: choice.status },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log("Update done: ", data);
+    }
+  );
+  res.json({ msg: "completed update" });
 };
 
 // Delete
@@ -47,6 +86,6 @@ exports.delete_stock_item = (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.send("item deleted");
+    res.json({ msg: "Item Deleted" });
   });
 };
