@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 
 // Connection to mongoose data base
 const mongoose = require("mongoose");
-const mongoDB =
-  "mongodb+srv://adminJames:MagicDoor1984@stock.crfx4.mongodb.net/stock?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGO_DB;
 mongoose.connect(mongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
