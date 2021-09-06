@@ -29,7 +29,7 @@ const StockItemSchema = new Schema({
   },
 });
 
-StockItemSchema.virtua("url").get(() => {
+StockItemSchema.virtual("url").get(() => {
   return "/stock/" + this._id;
 });
 
