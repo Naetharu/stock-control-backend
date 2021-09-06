@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connection to routes
 app.use("/stock/", require("./routes/stockRoute"));
+app.use("/dashboard/", require("./routes/dashRoute"));
 // Run app
 
 app.listen(5000, () => {
