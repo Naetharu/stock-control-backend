@@ -1,6 +1,13 @@
 // Create
+const StockItem = require("../models/stockItem");
+
 exports.create_stock_item = (req, res) => {
-  res.send("Creating a stock item");
+  StockItem.find()
+    .sort({ assent: 1 })
+    .exec((err, item_list) => {
+      console.error(err);
+    });
+  res.json({ result: item_list });
 };
 
 // Read
