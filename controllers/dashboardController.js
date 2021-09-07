@@ -1,27 +1,30 @@
 const StockItem = require("../models/stockItem");
 const async = require("async");
 
-exports.get_stock_numbers = (req, res) => {
-  // This should be async paralell?
+let stockNumbers = {
+  computers: {
+    cOrder: 0,
+    cStock: 0,
+    cBuild: 0,
+  },
+  tablets: {
+    tOrder: 0,
+    tStock: 0,
+    tBuild: 0,
+  },
+  phones: {
+    pOrder: 0,
+    pStock: 0,
+    pBuild: 0,
+  },
+};
 
-  let answer = {
-    compStock: 0,
-    compOrder: 0,
-    compBuild: 0,
-  };
-
-  StockItem.find({ status: "Stock" }).exec((err, build_list) => {
+exports.get_stock_numbers = async (req, res) => {
+  await StockItem.find({ status: "Build" }, (err, results) => {
     if (err) {
-      console.log(err);
+      console.error(err);
+      res.json({ msg: err });
     }
-    console.log("stock: ", build_list.length);
-
-    let check = build_list.length;
-
-    answer.compStock = check;
-
-    console.log(answer);
-
-    res.json({ result: answer });
+    stockNumbers.computers.cBuild = results.length;
   });
 };
