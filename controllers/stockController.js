@@ -2,9 +2,10 @@ const StockItem = require("../models/stockItem");
 
 // Create
 exports.create_stock_item = (req, res) => {
-  const { name, status, contract, location, serial, asset } = req.body.item;
+  const { name, status, contract, location, serial, asset, dueDate } =
+    req.body.item;
 
-  console.log("inside the dashboard controller");
+  console.log("inside the dashboard controller: ", req.body.item);
 
   const newItem = new StockItem({
     name: name,
@@ -13,6 +14,7 @@ exports.create_stock_item = (req, res) => {
     location: location,
     serial: serial,
     asset: asset,
+    dueDate: dueDate,
   });
   newItem.save((err) => {
     if (err) {

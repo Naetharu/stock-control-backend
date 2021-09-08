@@ -1,7 +1,7 @@
 const StockItem = require("../models/stockItem");
 const async = require("async");
 
-const crunchNumbers = (items) => {
+const service_stock_numbers = (items) => {
   let result = {
     Order: 0,
     Stock: 0,
@@ -26,9 +26,12 @@ const crunchNumbers = (items) => {
 exports.get_stock_numbers = (req, res) => {
   StockItem.find({}, "status")
     .then((item) => {
-      return crunchNumbers(item);
+      return service_stock_numbers(item);
     })
     .then((item) => {
       res.json({ item });
+    })
+    .catch((err) => {
+      console.error("Error in Dashboard Controller: ", err);
     });
 };
