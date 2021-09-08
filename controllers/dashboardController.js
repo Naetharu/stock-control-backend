@@ -1,30 +1,34 @@
 const StockItem = require("../models/stockItem");
 const async = require("async");
 
-let stockNumbers = {
-  computers: {
-    cOrder: 0,
-    cStock: 0,
-    cBuild: 0,
-  },
-  tablets: {
-    tOrder: 0,
-    tStock: 0,
-    tBuild: 0,
-  },
-  phones: {
-    pOrder: 0,
-    pStock: 0,
-    pBuild: 0,
-  },
+const crunchNumbers = (items) => {
+  let result = {
+    Order: 0,
+    Stock: 0,
+    Build: 0,
+  };
+
+  for (const [key, value] of Object.entries(items)) {
+    if (value.status === "Order") {
+      result.Order++;
+    } else if (value.status === "Stock") {
+      result.Stock++;
+    } else if (value.status === "Build") {
+      result.Build++;
+    }
+  }
+
+  console.log("Updated numbers", [result.Order, result.Stock, result.Build]);
+
+  return result;
 };
 
-exports.get_stock_numbers = async (req, res) => {
-  await StockItem.find({ status: "Build" }, (err, results) => {
-    if (err) {
-      console.error(err);
-      res.json({ msg: err });
-    }
-    stockNumbers.computers.cBuild = results.length;
-  });
+exports.get_stock_numbers = (req, res) => {
+  StockItem.find({}, "status")
+    .then((item) => {
+      return crunchNumbers(item);
+    })
+    .then((item) => {
+      res.json({ item });
+    });
 };

@@ -25,6 +25,7 @@ const createItem = (
   i_location,
   i_serial,
   i_asset,
+  i_date,
   callback
 ) => {
   let item = new StockItem({
@@ -34,6 +35,7 @@ const createItem = (
     location: i_location,
     serial: i_serial,
     asset: i_asset,
+    dueDate: i_date,
   });
 
   item.save((err) => {
@@ -59,6 +61,7 @@ const sampleItems = (cb) => {
           "VH",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -70,6 +73,7 @@ const sampleItems = (cb) => {
           "Brunswick",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -81,6 +85,7 @@ const sampleItems = (cb) => {
           "Griffin Lane",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -92,6 +97,7 @@ const sampleItems = (cb) => {
           "Sandy",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -103,6 +109,7 @@ const sampleItems = (cb) => {
           "VH",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -114,6 +121,7 @@ const sampleItems = (cb) => {
           "VH",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -125,6 +133,7 @@ const sampleItems = (cb) => {
           "VH",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -136,6 +145,7 @@ const sampleItems = (cb) => {
           "Springfield",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -147,6 +157,7 @@ const sampleItems = (cb) => {
           "VH",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },
@@ -158,6 +169,7 @@ const sampleItems = (cb) => {
           "Thorn Turn",
           "SR" + Math.floor(Math.random() * 1000),
           "RJ" + Math.floor(Math.random() * 1000),
+          Date(),
           callback
         );
       },

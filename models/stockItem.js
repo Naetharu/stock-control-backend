@@ -27,6 +27,12 @@ const StockItemSchema = new Schema({
     type: String,
     required: false,
   },
+  dueDate: {
+    type: Date,
+    min: "2020-01-01",
+    max: "2100-01-01",
+    required: false,
+  },
 });
 
 StockItemSchema.virtual("url").get(() => {
